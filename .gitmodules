@@ -1,0 +1,3 @@
+[submodule "nginx/msa-nginx-stats"]
+	path = nginx/msa-nginx-stats
+	url = https://github.com/TheMicroservicesAgency/msa-nginx-stats
