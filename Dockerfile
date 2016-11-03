@@ -1,5 +1,5 @@
 ###
-### Custom Dockerfile to create Microservices with Nginx, Python + Flask
+### Custom Dockerfile to create Microservices with Nginx & Python
 ### Created by the Microservices Agency
 ###
 
@@ -120,8 +120,8 @@ RUN cd /usr/local/bin \
 
 #FROM alpine:3.4
 
-COPY /nginx/msa-nginx-stats /nginx/msa-nginx-stats
-COPY /nginx/nginx-module-vts /nginx/nginx-module-vts
+COPY /nginx/msa-nginx-stats /opt/nginx/msa-nginx-stats
+COPY /nginx/nginx-module-vts /opt/nginx/nginx-module-vts
 
 MAINTAINER NGINX Docker Maintainers "docker-maint@nginx.com"
 
@@ -164,12 +164,10 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		--with-stream \
 		--with-stream_ssl_module \
 		--with-http_slice_module \
-		--with-mail \
-		--with-mail_ssl_module \
 		--with-file-aio \
 		--with-http_v2_module \
 		--with-ipv6 \
-		--add-module=/nginx/nginx-module-vts \
+		--add-module=/opt/nginx/nginx-module-vts \
 	" \
 	&& addgroup -S nginx \
 	&& adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
@@ -242,19 +240,19 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
-#COPY /nginx/nginx.conf /etc/nginx/nginx.conf
+COPY /nginx/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 9001
 
 ################################################################################
 
-ADD requirements.txt /app/
-RUN pip install -r /app/requirements.txt
-ADD app.py /app/
-ADD VERSION /
-ADD NAME /
-ADD run.sh /app/
+# Install the python dependencies if needed
+ADD requirements.txt /opt/app/
+RUN pip install -r /opt/app/requirements.txt
 
-COPY /nginx/nginx.conf /etc/nginx/nginx.conf
+# Copy all the other application files to /opt
+ADD README.md NAME LICENSE VERSION /opt/app/
+ADD run.sh /opt/app/
+ADD app.py /opt/app/
 
-CMD ["ash", "app/run.sh"]
+CMD ["ash", "/opt/app/run.sh"]

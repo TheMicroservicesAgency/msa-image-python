@@ -28,4 +28,5 @@ ps aux | grep [n]ginx
 
 echo " "
 echo " * Starting Python app ..."
-python app/app.py 2>> /dev/stderr 1>> /dev/stdout
+cd /opt/app/
+python app.py 2>> /dev/stderr 1>> /dev/stdout
