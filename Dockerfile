@@ -120,6 +120,9 @@ RUN cd /usr/local/bin \
 
 #FROM alpine:3.4
 
+COPY /nginx/msa-nginx-stats /nginx/msa-nginx-stats
+COPY /nginx/nginx-module-vts /nginx/nginx-module-vts
+
 MAINTAINER NGINX Docker Maintainers "docker-maint@nginx.com"
 
 ENV NGINX_VERSION 1.10.2
@@ -156,7 +159,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		--with-http_auth_request_module \
 		--with-http_xslt_module=dynamic \
 		--with-http_image_filter_module=dynamic \
-		--with-http_geoip_module=dynamic \
 		--with-http_perl_module=dynamic \
 		--with-threads \
 		--with-stream \
@@ -167,6 +169,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		--with-file-aio \
 		--with-http_v2_module \
 		--with-ipv6 \
+		--add-module=/nginx/nginx-module-vts \
 	" \
 	&& addgroup -S nginx \
 	&& adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
@@ -182,7 +185,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		gnupg \
 		libxslt-dev \
 		gd-dev \
-		geoip-dev \
 		perl-dev \
 	&& curl -fSL http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
 	&& curl -fSL http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
@@ -199,7 +201,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& mv objs/nginx objs/nginx-debug \
 	&& mv objs/ngx_http_xslt_filter_module.so objs/ngx_http_xslt_filter_module-debug.so \
 	&& mv objs/ngx_http_image_filter_module.so objs/ngx_http_image_filter_module-debug.so \
-	&& mv objs/ngx_http_geoip_module.so objs/ngx_http_geoip_module-debug.so \
 	&& mv objs/ngx_http_perl_module.so objs/ngx_http_perl_module-debug.so \
 	&& ./configure $CONFIG \
 	&& make -j$(getconf _NPROCESSORS_ONLN) \
@@ -212,7 +213,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& install -m755 objs/nginx-debug /usr/sbin/nginx-debug \
 	&& install -m755 objs/ngx_http_xslt_filter_module-debug.so /usr/lib/nginx/modules/ngx_http_xslt_filter_module-debug.so \
 	&& install -m755 objs/ngx_http_image_filter_module-debug.so /usr/lib/nginx/modules/ngx_http_image_filter_module-debug.so \
-	&& install -m755 objs/ngx_http_geoip_module-debug.so /usr/lib/nginx/modules/ngx_http_geoip_module-debug.so \
 	&& install -m755 objs/ngx_http_perl_module-debug.so /usr/lib/nginx/modules/ngx_http_perl_module-debug.so \
 	&& ln -s ../../usr/lib/nginx/modules /etc/nginx/modules \
 	&& strip /usr/sbin/nginx* \
@@ -242,12 +242,9 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
-COPY /nginx/nginx.conf /etc/nginx/nginx.conf
-# COPY /nginx/nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+#COPY /nginx/nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80 443
-
-#CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 9001
 
 ################################################################################
 
@@ -257,4 +254,7 @@ ADD app.py /app/
 ADD VERSION /
 ADD NAME /
 ADD run.sh /app/
+
+COPY /nginx/nginx.conf /etc/nginx/nginx.conf
+
 CMD ["ash", "app/run.sh"]
