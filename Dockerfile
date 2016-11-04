@@ -241,6 +241,8 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY /nginx/nginx.conf /etc/nginx/nginx.conf
+COPY /swagger /opt/swagger
+COPY /swagger/msa-swagger/theme /opt/swagger/msa-swagger/swagger/theme
 
 EXPOSE 9001
 
