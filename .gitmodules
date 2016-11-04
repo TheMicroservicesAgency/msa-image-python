@@ -4,3 +4,6 @@
 [submodule "nginx/nginx-module-vts"]
 	path = nginx/nginx-module-vts
 	url = git@github.com:TheMicroservicesAgency/nginx-module-vts.git
+[submodule "swagger/msa-swagger"]
+	path = swagger/msa-swagger
+	url = git@github.com:TheMicroservicesAgency/msa-swagger.git
