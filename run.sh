@@ -1,4 +1,8 @@
 #!/bin/ash
+#
+# This script will be executed inside the docker container
+
+cd /opt/app/
 
 VERSION=`cat VERSION`
 NAME=`cat NAME`
@@ -28,5 +32,4 @@ ps aux | grep [n]ginx
 
 echo " "
 echo " * Starting Python app ..."
-cd /opt/app/
 python app.py 2>> /dev/stderr 1>> /dev/stdout

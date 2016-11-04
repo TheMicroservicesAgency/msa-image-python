@@ -12,7 +12,6 @@ def hello_world():
     response = jsonify(data)
     return response
 
-
 @app.route('/cached_hello')
 def cacheable_hello_world():
     data = {'message': 'Hello, World! This can be cached for 15 secs.'}
@@ -20,31 +19,6 @@ def cacheable_hello_world():
     response.headers['Etag'] = "21ry8f392h93"
     response.cache_control.max_age = 15
     return response
-
-
-@app.route('/version')
-def get_version():
-
-    version = ""
-    with open("VERSION", 'r') as fd:
-        version = fd.read().strip()
-
-    data = {'version': version}
-    response = jsonify(data)
-    return response
-
-
-@app.route('/name')
-def get_name():
-
-    name = ""
-    with open("NAME", 'r') as fd:
-        name = fd.read().strip()
-
-    data = {'name': name}
-    response = jsonify(data)
-    return response
-
 
 @app.after_request
 def add_header(response):
