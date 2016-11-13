@@ -1,2 +1,2 @@
 
-# msa-template-flask-python
+# msa-image-python

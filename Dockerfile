@@ -248,13 +248,5 @@ EXPOSE 9001
 
 ################################################################################
 
-# Install the python dependencies if needed
-ADD requirements.txt /opt/app/
-RUN pip install -r /opt/app/requirements.txt
-
 # Copy all the other application files to /opt
 ADD README.md NAME LICENSE VERSION /opt/app/
-ADD run.sh /opt/app/
-ADD app.py /opt/app/
-
-CMD ["ash", "/opt/app/run.sh"]
