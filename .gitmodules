@@ -1,9 +1,9 @@
 [submodule "nginx/msa-nginx-stats"]
 	path = nginx/msa-nginx-stats
-	url = https://github.com/TheMicroservicesAgency/msa-nginx-stats
+	url = git@github.com:TheMicroservicesAgency/msa-nginx-dashboard.git
 [submodule "nginx/nginx-module-vts"]
 	path = nginx/nginx-module-vts
-	url = git@github.com:TheMicroservicesAgency/nginx-module-vts.git
+	url = git@github.com:vozlt/nginx-module-vts.git
 [submodule "swagger/msa-swagger"]
 	path = swagger/msa-swagger
-	url = git@github.com:TheMicroservicesAgency/msa-swagger.git
+	url = git@github.com:TheMicroservicesAgency/msa-swagger-theme.git

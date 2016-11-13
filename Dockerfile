@@ -120,7 +120,7 @@ RUN cd /usr/local/bin \
 
 #FROM alpine:3.4
 
-COPY /nginx/msa-nginx-stats /opt/nginx/msa-nginx-stats
+COPY /nginx/msa-nginx-dashboard /opt/nginx/msa-nginx-dashboard
 COPY /nginx/nginx-module-vts /opt/nginx/nginx-module-vts
 
 MAINTAINER NGINX Docker Maintainers "docker-maint@nginx.com"
@@ -242,7 +242,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 
 COPY /nginx/nginx.conf /etc/nginx/nginx.conf
 COPY /swagger /opt/swagger
-COPY /swagger/msa-swagger/theme /opt/swagger/msa-swagger/swagger/theme
 
 EXPOSE 9001
 
