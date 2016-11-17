@@ -7,3 +7,6 @@
 [submodule "swagger/msa-swagger"]
 	path = swagger/msa-swagger
 	url = git@github.com:TheMicroservicesAgency/msa-swagger-theme.git
+[submodule "nginx/msa-readme-parser"]
+	path = nginx/msa-readme-parser
+	url = git@github.com:TheMicroservicesAgency/msa-readme-parser.git
