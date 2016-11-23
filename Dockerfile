@@ -120,7 +120,6 @@ RUN cd /usr/local/bin \
 
 #FROM alpine:3.4
 
-COPY /nginx/msa-nginx-dashboard /opt/nginx/msa-nginx-dashboard
 COPY /nginx/nginx-module-vts /opt/nginx/nginx-module-vts
 
 MAINTAINER NGINX Docker Maintainers "docker-maint@nginx.com"
@@ -241,11 +240,13 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY /nginx/nginx.conf /etc/nginx/nginx.conf
+COPY /nginx/msa-nginx-dashboard /opt/nginx/msa-nginx-dashboard
+COPY /nginx/msa-readme-parser  /opt/nginx/msa-readme-parser
 COPY /swagger /opt/swagger
 
-EXPOSE 9001
+EXPOSE 80
 
 ################################################################################
 
 # Copy all the other application files to /opt
-ADD README.md NAME LICENSE VERSION /opt/app/
+ADD README.md NAME LICENSE VERSION /opt/ms/

@@ -17,13 +17,14 @@ Nginx will foward every HTTP request to the port 8080, except for the following 
 
 | File(s)                            | URL                           |
 |------------------------------------|-------------------------------|
-| /opt/app/VERSION                   | /version                      |
-| /opt/app/NAME                      | /name                         |
-| /opt/app/Readme.md                 | /readme                       |
+| /opt/ms/VERSION                    | /ms/version                   |
+| /opt/ms/NAME                       | /ms/name                      |
+| /opt/ms/Readme.md                  | /ms/readme.md                 |
+|                                    | /ms/readme.html               |
 | /opt/swagger/swagger.json          | /swagger/swagger.json         |
 | /opt/swagger/msa-swagger-ui/*      | /swagger/#/                   |
-| /opt/nginx/msa-nginx-dashboard/*   | /nginx/dashboard              |
-
+| /opt/nginx/msa-nginx-dashboard/*   | /nginx/stats.html             |
+|                                    | /nginx/stats.json             |
 
 Also included in the default Nginx configuration  :
 
