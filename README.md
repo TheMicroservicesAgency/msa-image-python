@@ -8,23 +8,32 @@ This Docker image can be used to create Python RESTful microservices. It include
 - Nginx 1.10.2
 - [msa-nginx-dashboard](https://github.com/TheMicroservicesAgency/msa-nginx-dashboard) ( custom dashboard for Nginx stats collected via nginx-module-vts )
 - [msa-swagger-ui](https://github.com/TheMicroservicesAgency/msa-swagger-ui) ( API documentation )
+- [msa-readme-parser](https://github.com/TheMicroservicesAgency/msa-readme-parser) (Simple Readme.md to html converter)
 
 ## Nginx configuration
 
 Nginx is preconfigured to listen on the port **80**, and act as a reverse proxy to any HTTP application running on the port **8080**.
 
-Nginx will foward every HTTP request to the port 8080, except for the following URLs, since they are reserved by convention. Any microservice built with this image should overrite the following files via the COPY command in the Dockerfile, to update these endpoints.
+Nginx will foward every HTTP request to the port 8080, except for the following URLs, since they are reserved by convention.
 
-| File(s)                            | URL                           |
-|------------------------------------|-------------------------------|
-| /opt/ms/VERSION                    | /ms/version                   |
-| /opt/ms/NAME                       | /ms/name                      |
-| /opt/ms/Readme.md                  | /ms/readme.md                 |
-|                                    | /ms/readme.html               |
-| /opt/swagger/swagger.json          | /swagger/swagger.json         |
-| /opt/swagger/msa-swagger-ui/*      | /swagger/#/                   |
-| /opt/nginx/msa-nginx-dashboard/*   | /nginx/stats.html             |
-|                                    | /nginx/stats.json             |
+Any microservice built with this image should overrite the following files via the COPY command in the Dockerfile, to update these endpoints.
+
+| File                          | URL                           |
+|-------------------------------|-------------------------------|
+| /opt/ms/VERSION               | /ms/version                   |
+| /opt/ms/NAME                  | /ms/name                      |
+| /opt/ms/Readme.md             | /ms/readme.md                 |
+| /opt/swagger/swagger.json     | /swagger/swagger.json         |
+
+
+Other endpoints available :
+
+| Component             | URL                 | Description                    |
+|-----------------------|---------------------|--------------------------------|
+| msa-readme-parser     | /ms/readme.html     | HTML version of the Readme     |
+| msa-swagger-ui        | /swagger/#/         | Swagger-UI                     |
+| msa-nginx-dashboard   | /nginx/stats.html   | Dashboard with stats on Nginx  |
+| msa-nginx-dashboard   | /nginx/stats.json   | Stats on Nginx as JSON         |
 
 Also included in the default Nginx configuration  :
 
@@ -42,6 +51,11 @@ FROM msa-image-python:1.0.0
 ```
 
 An example can be found here : [msa-template-python](https://github.com/TheMicroservicesAgency/msa-template-python)
+
+## Todo
+
+- Simplify the Nginx config
+
 
 ## About
 
