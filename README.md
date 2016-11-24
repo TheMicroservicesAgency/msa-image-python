@@ -47,7 +47,7 @@ Also included in the default Nginx configuration  :
 To use this image simply this line at the top of your Dockerfile :
 
 ```
-FROM msa-image-python:1.0.0
+FROM msagency/gmsa-image-python:latest
 ```
 
 An example can be found here : [msa-template-python](https://github.com/TheMicroservicesAgency/msa-template-python)
@@ -59,4 +59,4 @@ An example can be found here : [msa-template-python](https://github.com/TheMicro
 
 ## About
 
-A project by the [Microservices Agency](http://microservices.agency).
+A project by the [Microservices Agency](https://microservices.agency).
