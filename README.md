@@ -59,4 +59,4 @@ An example can be found here : [msa-template-python](https://github.com/TheMicro
 
 ## About
 
-A project by the [Microservices Agency](https://microservices.agency).
+A project by the [Microservices Agency](http://microservices.agency).
