@@ -1,12 +1,12 @@
-[submodule "nginx/msa-nginx-stats"]
-	path = nginx/msa-nginx-stats
-	url = git@github.com:TheMicroservicesAgency/msa-nginx-dashboard.git
+[submodule "nginx/msa-nginx-dashboard"]
+	path = nginx/msa-nginx-dashboard
+	url = https://github.com/TheMicroservicesAgency/msa-nginx-dashboard.git
 [submodule "nginx/nginx-module-vts"]
 	path = nginx/nginx-module-vts
-	url = git@github.com:vozlt/nginx-module-vts.git
-[submodule "swagger/msa-swagger"]
-	path = swagger/msa-swagger
-	url = git@github.com:TheMicroservicesAgency/msa-swagger-theme.git
+	url = https://github.com/vozlt/nginx-module-vts.git
 [submodule "nginx/msa-readme-parser"]
 	path = nginx/msa-readme-parser
-	url = git@github.com:TheMicroservicesAgency/msa-readme-parser.git
+	url = https://github.com/TheMicroservicesAgency/msa-readme-parser.git
+[submodule "swagger/msa-swagger-ui"]
+	path = swagger/msa-swagger-ui
+	url = https://github.com/TheMicroservicesAgency/msa-swagger-ui.git
